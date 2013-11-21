@@ -2,6 +2,7 @@
 
 void gotoxy(int x, int y)
 {
+	// some comment
 	HANDLE hConsoleOutput;
 	COORD dwCursorPosition;
 	std::cout.flush();
