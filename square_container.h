@@ -8,10 +8,13 @@ using std::list;
 using std::cout;
 using std::endl;
 
-class BoxDrawingApp
+class SquareContainer
 {
 private:
+	int totalSquares;
 	list<Square> collection;
+	list<Square>::iterator iter;
+	Point userInputPoint;
 
 public:
 	Square& createSquare(); // allocate new square from user input
@@ -19,5 +22,5 @@ public:
 	void deleteSquare(const Square& square); // delete a square from the collection
 	void deleteSquare(const Point& point); // same thing, by a given point
 };
-	
+
 
