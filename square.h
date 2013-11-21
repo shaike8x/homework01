@@ -10,6 +10,7 @@ private:
 	int y; 
 	int m_length;
 	char m_ch;
+	int m;
 
 public:
 	Square(int vx, int vy, int length, char ch);
