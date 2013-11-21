@@ -1,9 +1,7 @@
 #include "square_container.h"
 #include <iostream>
 
-SquareContainer::SquareContainer() {
-	this->totalSquares = 0;
-}
+SquareContainer::SquareContainer() { this->totalSquares = 0; }
 
 int SquareContainer::getTotalSquares() const { return this->totalSquares; }
 
@@ -76,5 +74,10 @@ void SquareContainer::drawAllSquares(const Square& selectedSquare) const {
 	selectedSquare.draw('@');
 }
 
-void SquareContainer::makeBlink(const Point& point) const {
+void SquareContainer::drawAllSquares(const Point& selectedPoint) const {
+	clrscr();
+	for (auto iter = this->collection.begin(); iter != this->collection.end();
+		++iter)
+		iter->draw();
+	selectedPoint.makeMeBlink();
 }

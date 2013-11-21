@@ -29,5 +29,4 @@ public:
 	void drawAllSquares() const; // normal draw
 	void drawAllSquares(const Square& selectedSquare) const; // print the argument last with @
 	void drawAllSquares(const Point& selectedPoint) const; // square not found - make point blink
-	void makeBlink(const Point& point) const;
 };

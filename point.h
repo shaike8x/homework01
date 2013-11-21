@@ -5,9 +5,9 @@
 using namespace std;
 
 class Point {
-	
 private:
 	int x, y;
+	static const int ESC_ASCII = 27;
 public:
 	int getX() const;
 	int getY() const;
@@ -17,6 +17,5 @@ public:
 	Point(int myX = 1, int myY = 1);
 	// comparison operator overload
 	bool operator==(const Point& rhs) const;
+	void makeMeBlink() const;
 };
-
-
