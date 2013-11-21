@@ -13,17 +13,39 @@ void Square::draw() const
 {
 	int cordY = this->y, cordX = this->x;
 	char ch = this->m_ch;
+	int lengthX, lengthY;
+	lengthX = lengthY = this->m_length;
 
 	gotoxy(this->x, this->y);
-	if (x > 0 && y > 0){
-		for (auto i = 0; i <= this->m_length; ++i) {
-			for (auto j = 0; j <= this->m_length; ++j) {
-				if (i == 0 || i == this->m_length)
+
+	if (x < 0){
+		if (cordX + this->m_length >= 0){
+			lengthX = this->m_length + cordX;
+			cordX = 0;
+			gotoxy(cordX, cordY);
+
+		}
+		else
+			return;
+	}
+	if (y < 0){
+		if (cordY + this->m_length >= 0){
+			lengthY = this->m_length + cordY;
+			cordY = 0;
+			gotoxy(cordX, cordY);
+		}
+		else
+			return;
+	}
+	
+		for (auto i = 0; i <= lengthY; ++i) {
+			for (auto j = 0; j <= lengthX; ++j) {
+				if (i == 0 || i == lengthY)
 					cout << ch;
 				else {
 					if (j == 0)
 						cout << ch;
-					else if (j == this->m_length)
+					else if (j == lengthX)
 						cout << ch;
 					else
 						cout << " ";
@@ -31,10 +53,7 @@ void Square::draw() const
 			}
 			gotoxy(cordX, ++cordY);
 		}
-	}
-	if (x > 0){
-		
-	}
+	
 }
 
 bool Square::isContainingPoint(const Point& point) const
@@ -49,3 +68,4 @@ bool Square::isContainingPoint(const Point& point) const
 			return true;
 	return false;
 }
+
