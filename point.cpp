@@ -7,15 +7,13 @@ bool Point::operator==(const Point& rhs) const
 }
 
 
-int Point::getX() const
-{
-	return this->x;
-}
+int Point::getX() const { return this->x; }
 
-int Point::getY() const
-{
-	return this->y;
-}
+int Point::getY() const { return this->y; }
+
+void Point::setX(int x) { this->x = x; }
+
+void Point::setY(int y) { this->y = y; }
 
 Point::Point(int myX, int myY) : x(myX), y(myY) {}
 

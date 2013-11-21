@@ -4,18 +4,19 @@
 class Point;
 class Square
 {
-
 private:
-	int x; 
-	int y; 
+	int x;
+	int y;
 	int m_length;
 	char m_ch;
 	int m;
 
 public:
 	Square(int vx, int vy, int length, char ch);
+	Square();
 	int getLength() const;
 	bool operator==(const Square& rhs) const;
 	void draw() const;
+	void draw(const char special) const;
 	bool isContainingPoint(const Point& point) const;
 };
