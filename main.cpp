@@ -6,7 +6,6 @@ using namespace std;
 
 int main(void)
 {
-	// added comment
 	Point myPoint(3, 2);
 	Square mySquare(myPoint.getX(), myPoint.getY() , 5, 'a');
 	clrscr();
