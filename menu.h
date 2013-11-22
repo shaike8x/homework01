@@ -1,18 +1,22 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <utility>
+#include <map>
 using namespace std;
 
 class Menu
 {
 private:
-	int totalOptions;
-	vector<string> option_strings;
-	void displayOptions(bool &flag);
-
+	vector<string> options;
+	int disabledOption;
+	bool someoneDisabled = false;
 public:
 
 	Menu();
-	void set(int option, string option_string);
-	int choose(bool &flag);
+	void setMenu(vector<string>& vOptions);
+	void displayOptions() const;
+	void disableOption(int optionNum);
+	void disableOption(bool flag);
+	int getSelection() const;
 };
