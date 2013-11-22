@@ -27,8 +27,11 @@ void SquareDrawingApp::run() {
 
 	this->mainMenu.displayOptions();
 	selection = this->mainMenu.getSelection();
-	while (selection != 8)
-	{
+	while (selection != 8) {
+		if (this->squares.getTotalSquares() >= 10)
+			this->mainMenu.disableOption(1);
+		else
+			this->mainMenu.disableOption(false);
 		this->mainMenu.displayOptions();
 		selection = this->mainMenu.getSelection();
 
@@ -48,11 +51,9 @@ void SquareDrawingApp::run() {
 			foundFlag1 = this->squares.findSquareByPoint(p1, s1);
 			foundFlag1 ? this->squares.drawAllSquares(s1) : this->squares.drawAllSquares(p1);
 			if (foundFlag1) {
-				do { 
-					this->subMenu.displayOptions();
-					selection2 = this->subMenu.getSelection();
-
-					switch (selection2) {
+				this->subMenu.displayOptions();
+				selection2 = this->subMenu.getSelection();
+				switch (selection2) {
 				case 1: // go back to main
 					this->squares.drawAllSquares();
 					escListener();
@@ -79,16 +80,16 @@ void SquareDrawingApp::run() {
 					escListener();
 					break;
 				}
-				} while (selection2 != 1);
+			break; // case 3
 			}
-			break;
-		
+			else {
+				cout << "Square not found.\n";
+				break;
+			}
 		case 8:
 			cout << "Bye bye!\n";
 			break;
 		}
-
-
 	}
 }
 

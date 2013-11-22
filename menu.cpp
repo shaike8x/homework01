@@ -4,6 +4,7 @@
 
 Menu::Menu() {
 	this->someoneDisabled = false;
+	this->disabledOption = 9;
 }
 
 void Menu::displayOptions() const {
