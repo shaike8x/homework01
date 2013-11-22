@@ -3,6 +3,8 @@
 #include <list>
 #include "point.h"
 #include "square.h"
+#include <chrono>
+#include <thread>
 
 using std::list;
 using std::cout;
@@ -18,6 +20,7 @@ private:
 public:
 	// default constructor
 	SquareContainer();
+	~SquareContainer();
 	int getTotalSquares() const;
 	// create square from user input
 	Square& createSquare();

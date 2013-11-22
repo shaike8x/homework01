@@ -6,11 +6,8 @@
 class SquareDrawingApp
 {
 private:
-	
-	vector<string> mainVector = { "Add Square", "Draw Squares",
-		"Choose a Square", "Quit"};
-	vector<string> subVector = { "Cancel Selection", "Delete Square",
-		"Move Square to Front", "Merge with other Square"};
+	vector<string> mainVector;
+	vector<string> subVector;
 	Menu mainMenu, subMenu;
 	
 	SquareContainer squares;
@@ -20,5 +17,6 @@ private:
 	void escListener() const;
 
 public:
+	SquareDrawingApp();
 	void run();
 };

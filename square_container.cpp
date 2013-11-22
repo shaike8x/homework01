@@ -97,3 +97,7 @@ void SquareContainer::mergeSquares(const Square& s1, const Square& s2) {
 	else // they must be completly strangers...
 		this->deleteSquare(smallerSquare);
 }
+
+SquareContainer::~SquareContainer() {
+	this->collection.clear();
+}
