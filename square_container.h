@@ -16,16 +16,21 @@ private:
 	Point userInputPoint;
 
 public:
+	// default constructor
 	SquareContainer();
 	int getTotalSquares() const;
-	Square& createSquare(); // create square from user input
+	// create square from user input
+	Square& createSquare();
 	bool findSquareByPoint(const Point& point, Square& square);
 	Point& getUserPoint();
 	void appendSquareToList(const Square& square);
-	void deleteSquare(const Square& square); // delete a square from the collection
-	// void deleteSquare(const Point& point); // same thing, by a given point
+	// delete a square from the collection
+	void deleteSquare(const Square& square);
 	void pushSquareForward(const Square& square);
-	void drawAllSquares() const; // normal draw
-	void drawAllSquares(const Square& selectedSquare) const; // print the argument last with @
-	void drawAllSquares(const Point& selectedPoint) const; // square not found - make point blink
+	// normal draw
+	void drawAllSquares() const;
+	// print the argument last with @
+	void drawAllSquares(const Square& selectedSquare) const;
+	// square not found - make point blink
+	void drawAllSquares(const Point& selectedPoint) const;
 };
