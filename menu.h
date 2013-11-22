@@ -1,8 +1,6 @@
 #pragma once
 #include <string>
 #include <vector>
-#include <utility>
-#include <map>
 using namespace std;
 
 class Menu
@@ -10,7 +8,7 @@ class Menu
 private:
 	vector<string> options;
 	int disabledOption;
-	bool someoneDisabled = false;
+	bool someoneDisabled;
 public:
 
 	Menu();

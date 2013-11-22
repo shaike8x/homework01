@@ -2,6 +2,10 @@
 #include "cmd_utils.h"
 
 
+Menu::Menu() {
+	this->someoneDisabled = false;
+}
+
 void Menu::displayOptions() const {
 	clrscr();
 	for (auto i = 1; i <= this->options.size(); ++i) {
