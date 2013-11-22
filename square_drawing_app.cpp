@@ -7,76 +7,71 @@ void SquareDrawingApp::initMenu(Menu& m, vector<string>& options) {
 }
 
 void SquareDrawingApp::escListener() const {
-	while (1) {
-		if (_kbhit() && _getch() == 27) {
-			clrscr();
-			return;
-		}
-	}
+	int ch = _getch();
+	while (ch != 27)
+		ch = _getch();
+	clrscr();
 }
 
 void SquareDrawingApp::run() {
 	Square s1, s2;
 	Point p1, p2;
-	SquareContainer sqrs = this->squares;
-	int selection, selection2;
+	int selection = 1, selection2;
 	bool foundFlag1, foundFlag2;
 
-	initMenu(this->mainMenu, this->mainVector);
-	initMenu(this->subMenu, this->subVector);
+	initMenu(mainMenu, mainVector);
+	initMenu(subMenu, subVector);
 
-	this->mainMenu.displayOptions();
-	selection = this->mainMenu.getSelection();
 	while (selection != 8) {
-		if (this->squares.getTotalSquares() >= 10)
-			this->mainMenu.disableOption(1);
+		if (squares.getTotalSquares() >= 10)
+			mainMenu.disableOption(1);
 		else
-			this->mainMenu.disableOption(false);
-		this->mainMenu.displayOptions();
-		selection = this->mainMenu.getSelection();
+			mainMenu.disableOption(false);
+		mainMenu.displayOptions();
+		selection = mainMenu.getSelection();
 
 		switch (selection) {
 		case 1: // add square
-			s1 = this->squares.createSquare();
-			this->squares.appendSquareToList(s1);
-			this->squares.drawAllSquares();
+			s1 = squares.createSquare();
+			squares.appendSquareToList(s1);
+			squares.drawAllSquares();
 			escListener();
 			break;
 		case 2: // draw squares
-			this->squares.drawAllSquares();
+			squares.drawAllSquares();
 			escListener();
 			break;
 		case 3: // choose square
-			p1 = this->squares.getUserPoint();
-			foundFlag1 = this->squares.findSquareByPoint(p1, s1);
-			foundFlag1 ? this->squares.drawAllSquares(s1) : this->squares.drawAllSquares(p1);
+			p1 = squares.getUserPoint();
+			foundFlag1 = squares.findSquareByPoint(p1, s1);
+			foundFlag1 ? squares.drawAllSquares(s1) : squares.drawAllSquares(p1);
 			if (foundFlag1) {
-				this->subMenu.displayOptions();
-				selection2 = this->subMenu.getSelection();
+				subMenu.displayOptions();
+				selection2 = subMenu.getSelection();
 				switch (selection2) {
 				case 1: // go back to main
-					this->squares.drawAllSquares();
+					squares.drawAllSquares();
 					escListener();
 					break;
 				case 2: // delete the square
-					this->squares.deleteSquare(s1);
+					squares.deleteSquare(s1);
 					escListener();
 					break;
 				case 3: // move forward
-					this->squares.pushSquareForward(s1);
-					this->squares.drawAllSquares();
+					squares.pushSquareForward(s1);
+					squares.drawAllSquares();
 					escListener();
 					break;
 				case 4: // merge with other square
-					p2 = this->squares.getUserPoint();
+					p2 = squares.getUserPoint();
 					foundFlag2 = this->squares.findSquareByPoint(p2, s2);
 					if (foundFlag2)
-						this->squares.mergeSquares(s1, s2);
+						squares.mergeSquares(s1, s2);
 					else {
 						cout << "No such square\n";
 						std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 					}
-					this->squares.drawAllSquares();
+					squares.drawAllSquares();
 					escListener();
 					break;
 				}

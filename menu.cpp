@@ -9,9 +9,9 @@ Menu::Menu() {
 
 void Menu::displayOptions() const {
 	clrscr();
-	for (auto i = 1; i <= this->options.size(); ++i) {
+	for (auto i = 0; i <= this->options.size(); ++i) {
 		if (someoneDisabled && i != disabledOption)
-			std::cout << i << ".\t" << options[i] << endl;
+			std::cout << i + 1 << ".\t" << options[i] << endl;
 	}
 }
 
