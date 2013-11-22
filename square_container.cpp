@@ -1,5 +1,7 @@
 #include "square_container.h"
 #include <iostream>
+#include <memory>
+using std::unique_ptr;
 
 SquareContainer::SquareContainer() { this->totalSquares = 0; }
 
@@ -16,7 +18,8 @@ Square& SquareContainer::createSquare() {
 		cout << "Enter x y length ch:\n";
 		cin >> x >> y >> length >> ch;
 	}
-	return Square(x, y, length, ch);
+	unique_ptr<Square> res(new Square(x, y, length, ch));
+	return *res;
 }
 
 void SquareContainer::appendSquareToList(const Square& square) {
@@ -41,15 +44,15 @@ Point& SquareContainer::getUserPoint() {
 	int x, y;
 	cout << "Please enter x y coordinates:\n";
 	cin >> x >> y;
-	return Point(x, y);
+	unique_ptr<Point> res(new Point(x, y));
+	return *res;
 }
 
-bool& SquareContainer::findSquareByPoint(const Point& point, Square& square) {
+bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
 	bool res = false;
 
 	for (list<Square>::reverse_iterator riter = this->collection.rbegin(); riter != this->collection.rend();
-		++riter)
-	{
+		++riter) {
 		if (riter->isContainingPoint(point)) {
 			res = true;
 			square = *riter;

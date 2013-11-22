@@ -4,14 +4,6 @@
 
 using namespace std;
 
-int main(void)
-{
-	// added comment
-	Point myPoint(-3, 2);
-	Square mySquare(myPoint.getX(), myPoint.getY() , 8, 'a');
-	clrscr();
-	mySquare.draw();
-	
-	
+int main(void) {
 	return 0;
 }

@@ -2,8 +2,7 @@
 #include "point.h"
 #include "cmd_utils.h"
 class Point;
-class Square
-{
+class Square {
 private:
 	int x;
 	int y;
@@ -20,3 +19,7 @@ public:
 	void draw(const char special) const;
 	bool isContainingPoint(const Point& point) const;
 };
+
+// TODO: overload <,>,!= for merging
+// implement the acual merge in square_container
+// create menu

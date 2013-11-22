@@ -4,8 +4,7 @@
 #include "point.h"
 #include "cmd_utils.h"
 
-bool Point::operator==(const Point& rhs) const
-{
+bool Point::operator==(const Point& rhs) const {
 	return (this->x == rhs.x && this->y == rhs.y);
 }
 
@@ -21,7 +20,7 @@ Point::Point(int myX, int myY) : x(myX), y(myY) {}
 
 void Point::makeMeBlink() const {
 	while (1) {
-		if (kbhit() || getch() == ESC_ASCII)
+		if (_kbhit() || _getch() == ESC_ASCII)
 			break;
 		gotoxy(this->x, this->y);
 		cout << '@';
