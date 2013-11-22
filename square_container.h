@@ -24,6 +24,7 @@ public:
 	bool findSquareByPoint(const Point& point, Square& square);
 	Point& getUserPoint();
 	void appendSquareToList(const Square& square);
+	void mergeSquares(const Square& s1, const Square& s2);
 	// delete a square from the collection
 	void deleteSquare(const Square& square);
 	void pushSquareForward(const Square& square);

@@ -84,3 +84,16 @@ void SquareContainer::drawAllSquares(const Point& selectedPoint) const {
 		iter->draw();
 	selectedPoint.makeMeBlink();
 }
+
+void SquareContainer::mergeSquares(const Square& s1, const Square& s2) {
+	Square smallerSquare = (s1.getLength() <= s2.getLength() ? s1 : s2);
+	Square biggerSquare = (s1.getLength() <= s2.getLength() ? s2 : s1);
+	if (s1 < s2)
+		this->deleteSquare(s1);
+	else if (s1 > s2)
+		this->deleteSquare(s2);
+	else if (s1.overlaps(s2))
+		this->deleteSquare(biggerSquare);
+	else // they must be completly strangers...
+		this->deleteSquare(smallerSquare);
+}
