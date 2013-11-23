@@ -18,6 +18,8 @@ void SquareDrawingApp::run() {
 	//Point p1, p2;
 	int selection = 1, selection2;
 	bool foundFlag1, foundFlag2;
+	mainVector.push_back("option 1");
+	mainVector.push_back("option2");
 
 	initMenu(mainMenu, mainVector);
 	initMenu(subMenu, subVector);
@@ -90,16 +92,3 @@ void SquareDrawingApp::run() {
 	//}
 }
 
-SquareDrawingApp::SquareDrawingApp() {
-	mainVector.reserve(4);
-	mainVector.push_back("Add Square");
-	mainVector.push_back("Draw Squares");
-	mainVector.push_back("Choose a Square");
-	mainVector.push_back("Quit");
-
-	subVector.reserve(4);
-	subVector.push_back("Go Back to Main");
-	subVector.push_back("Delete Square");
-	subVector.push_back("Move Square to Front");
-	subVector.push_back("Merge with other Square");
-}

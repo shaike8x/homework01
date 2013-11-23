@@ -24,10 +24,10 @@ void Point::makeMeBlink() const {
 	while (!flag && (!_kbhit() || _getch() != ESC_ASCII)) {
 		gotoxy(x,y);
 		cout << '@';
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(700));
 		gotoxy(x,y);
 		cout << " ";
-		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		std::this_thread::sleep_for(std::chrono::milliseconds(700));
 
 		if (_kbhit())
 			flag = (_getch() == ESC_ASCII);

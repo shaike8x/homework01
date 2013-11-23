@@ -2,6 +2,7 @@
 #include "menu.h"
 #include <vector>
 #include <string>
+#include <iostream>
 
 class SquareDrawingApp
 {
@@ -17,6 +18,5 @@ private:
 	void escListener() const;
 
 public:
-	SquareDrawingApp();
 	void run();
 };

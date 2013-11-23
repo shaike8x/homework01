@@ -22,14 +22,15 @@ Square& SquareContainer::createSquare() {
 	return *res;
 }
 
-void SquareContainer::addSquare(const Square& square) {
-	collection.push_back(square);
+void SquareContainer::addSquare() {
+	Square s = createSquare();
+	collection.push_back(s);
 	totalSquares++;
 }
 
 void SquareContainer::deleteSquare(const Square& square) {
 	collection.remove(square);
-	(totalSquares)--;
+	totalSquares--;
 }
 
 void SquareContainer::pushSquareForward(const Square& square) {
@@ -64,25 +65,36 @@ bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
 
 void SquareContainer::drawAllSquares() const {
 	clrscr();
-	for (auto iter = collection.begin(); iter != collection.end();
-		++iter)
-		iter->draw();
+	if (!collection.empty())
+		for (auto iter = collection.begin(); iter != collection.end();
+			++iter)
+			iter->draw();
+	else
+		cout << "No squares to print.\n";
 }
 
 void SquareContainer::drawAllSquares(const Square& selectedSquare) const {
 	clrscr();
-	for (auto iter = collection.begin(); iter != collection.end();
-		++iter)
-		iter->draw();
-	selectedSquare.draw('@');
+	if (!collection.empty()) {
+		for (auto iter = collection.begin(); iter != collection.end();
+			++iter)
+			iter->draw();
+		selectedSquare.draw('@');
+	}
+	else
+		cout << "No squares to print.\n";
 }
 
 void SquareContainer::drawAllSquares(const Point& selectedPoint) const {
 	clrscr();
+	if (!collection.empty()) {
 	for (auto iter = collection.begin(); iter != collection.end();
 		++iter)
 		iter->draw();
 	selectedPoint.makeMeBlink();
+	}
+	else
+		cout << "No squares to print.\n";
 }
 
 void SquareContainer::mergeSquares(const Square& s1, const Square& s2) {

@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(void) {
-	SquareDrawingApp myApp;
-	myApp.run();
+	//SquareDrawingApp myApp;
+	//myApp.run();
 	return 0;
 }

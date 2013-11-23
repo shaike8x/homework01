@@ -14,19 +14,26 @@ class SquareContainer {
 private:
 	int totalSquares;
 	list<Square> collection;
-	list<Square>::iterator iter = collection.end();
+	Square& createSquare(); // create square from user input
 
 public:
 	// default constructor
 	SquareContainer();
+	
 	~SquareContainer();
+	
 	int getTotalSquares() const;
-	// create square from user input
-	Square& createSquare();
+	
+	
+	
 	bool findSquareByPoint(const Point& point, Square& square);
+	
 	Point& getUserPoint();
-	void addSquare(const Square& square);
+	
+	void addSquare();
+	
 	void mergeSquares(const Square& s1, const Square& s2);
+	
 	// delete a square from the collection
 	void deleteSquare(const Square& square);
 	void pushSquareForward(const Square& square);
