@@ -10,16 +10,16 @@ int Square::getX() const { return this->x; }
 int Square::getY() const { return this->y; }
 
 void Square::draw() const {
-	int cordY = this->y, cordX = this->x;
-	char ch = this->m_ch;
+	int cordY = y, cordX = x;
+	char ch = m_ch;
 	int lengthX, lengthY;
-	lengthX = lengthY = this->m_length;
+	lengthX = lengthY = m_length;
 
-	gotoxy(this->x, this->y);
+	gotoxy(x, y);
 
 	if (x < 0) {
-		if (cordX + this->m_length >= 0) {
-			lengthX = this->m_length + cordX;
+		if (cordX + m_length >= 0) {
+			lengthX = m_length + cordX;
 			cordX = 0;
 			gotoxy(cordX, cordY);
 		}
@@ -27,8 +27,8 @@ void Square::draw() const {
 			return;
 	}
 	if (y < 0) {
-		if (cordY + this->m_length >= 0) {
-			lengthY = this->m_length + cordY;
+		if (cordY + m_length >= 0) {
+			lengthY = m_length + cordY;
 			cordY = 0;
 			gotoxy(cordX, cordY);
 		}
@@ -54,16 +54,16 @@ void Square::draw() const {
 }
 
 void Square::draw(const char special) const {
-	int cordY = this->y, cordX = this->x;
+	int cordY = y, cordX = x;
 	char ch = special;
 	int lengthX, lengthY;
-	lengthX = lengthY = this->m_length;
+	lengthX = lengthY = m_length;
 
-	gotoxy(this->x, this->y);
+	gotoxy(x, y);
 
 	if (x < 0) {
-		if (cordX + this->m_length >= 0) {
-			lengthX = this->m_length + cordX;
+		if (cordX + m_length >= 0) {
+			lengthX = m_length + cordX;
 			cordX = 0;
 			gotoxy(cordX, cordY);
 		}
@@ -71,8 +71,8 @@ void Square::draw(const char special) const {
 			return;
 	}
 	if (y < 0) {
-		if (cordY + this->m_length >= 0) {
-			lengthY = this->m_length + cordY;
+		if (cordY + m_length >= 0) {
+			lengthY = m_length + cordY;
 			cordY = 0;
 			gotoxy(cordX, cordY);
 		}
@@ -98,10 +98,10 @@ void Square::draw(const char special) const {
 }
 
 bool Square::isContainingPoint(const Point& point) const {
-	int leftX = this->x;
-	int rightX = this->x + this->m_length;
-	int topY = this->y;
-	int bottomY = this->y + this->m_length;
+	int leftX = x;
+	int rightX = x + m_length;
+	int topY = y;
+	int bottomY = y + m_length;
 
 	if (point.getX() <= rightX && point.getX() >= leftX)
 	if (point.getY() <= bottomY && point.getY() >= topY)
@@ -110,15 +110,15 @@ bool Square::isContainingPoint(const Point& point) const {
 }
 
 bool Square::operator==(const Square& rhs) const {
-	return (this->x == rhs.x && this->y == rhs.y && this->m_length == rhs.m_length);
+	return (x == rhs.x && y == rhs.y && m_length == rhs.m_length);
 }
 
 bool Square::operator<(const Square& rhs) const {
-	int s1LeftX = this->x;
-	int s1RightX = this->x + this->m_length;
-	int s1topY = this->y;
-	int s1bottomY = this->y + this->m_length;
-	int s1length = this->m_length;
+	int s1LeftX = x;
+	int s1RightX = x + m_length;
+	int s1topY = y;
+	int s1bottomY = y + m_length;
+	int s1length = m_length;
 	int s2LeftX = rhs.getX();
 	int s2RightX = rhs.getX() + rhs.getLength();
 	int s2topY = rhs.getY();
@@ -134,11 +134,11 @@ bool Square::operator<(const Square& rhs) const {
 }
 
 bool Square::operator>(const Square& rhs) const {
-	int s1LeftX = this->x;
-	int s1RightX = this->x + this->m_length;
-	int s1topY = this->y;
-	int s1bottomY = this->y + this->m_length;
-	int s1length = this->m_length;
+	int s1LeftX = x;
+	int s1RightX = x + m_length;
+	int s1topY = y;
+	int s1bottomY = y + m_length;
+	int s1length = m_length;
 	int s2LeftX = rhs.getX();
 	int s2RightX = rhs.getX() + rhs.getLength();
 	int s2topY = rhs.getY();
@@ -154,9 +154,9 @@ bool Square::operator>(const Square& rhs) const {
 }
 
 bool Square::overlaps(const Square& rhs) const {
-	Point currPoint;
-	for (auto currX = this->x; currX <= this->x + this->m_length; ++currX)
-		for (auto currY = this->y; currY <= this->y + this->m_length; ++currY) {
+	Point currPoint(x,y);
+	for (auto currX = x; currX <= x + m_length; ++currX)
+		for (auto currY = y; currY <= y + m_length; ++currY) {
 			currPoint.setX(currX);
 			currPoint.setY(currY);
 			if (rhs.isContainingPoint(currPoint))

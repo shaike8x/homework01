@@ -15,7 +15,6 @@ private:
 	int totalSquares;
 	list<Square> collection;
 	list<Square>::iterator iter = collection.end();
-	Point userInputPoint;
 
 public:
 	// default constructor
@@ -26,7 +25,7 @@ public:
 	Square& createSquare();
 	bool findSquareByPoint(const Point& point, Square& square);
 	Point& getUserPoint();
-	void appendSquareToList(const Square& square);
+	void addSquare(const Square& square);
 	void mergeSquares(const Square& s1, const Square& s2);
 	// delete a square from the collection
 	void deleteSquare(const Square& square);

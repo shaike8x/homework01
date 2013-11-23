@@ -13,7 +13,7 @@ private:
 	SquareContainer squares;
 
 
-	void initMenu(Menu& m, vector<string>& options);
+	void initMenu(Menu& m, const vector<string> options);
 	void escListener() const;
 
 public:

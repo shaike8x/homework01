@@ -3,9 +3,9 @@
 #include <memory>
 using std::unique_ptr;
 
-SquareContainer::SquareContainer() { this->totalSquares = 0; }
+SquareContainer::SquareContainer() { totalSquares = 0; }
 
-int SquareContainer::getTotalSquares() const { return this->totalSquares; }
+int SquareContainer::getTotalSquares() const { return totalSquares; }
 
 Square& SquareContainer::createSquare() {
 	int x, y, length;
@@ -22,22 +22,22 @@ Square& SquareContainer::createSquare() {
 	return *res;
 }
 
-void SquareContainer::appendSquareToList(const Square& square) {
-	this->collection.push_back(square);
-	(this->totalSquares)++;
+void SquareContainer::addSquare(const Square& square) {
+	collection.push_back(square);
+	totalSquares++;
 }
 
 void SquareContainer::deleteSquare(const Square& square) {
-	this->collection.remove(square);
-	(this->totalSquares)--;
+	collection.remove(square);
+	(totalSquares)--;
 }
 
 void SquareContainer::pushSquareForward(const Square& square) {
 	list<Square>::iterator temp;
-	for (temp = this->collection.begin(); temp != this->collection.end(); ++temp)
+	for (temp = collection.begin(); temp != collection.end(); ++temp)
 	if (*temp == square)
-		this->collection.erase(temp);
-	this->collection.push_back(square);
+		collection.erase(temp);
+	collection.push_back(square);
 }
 
 Point& SquareContainer::getUserPoint() {
@@ -51,7 +51,7 @@ Point& SquareContainer::getUserPoint() {
 bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
 	bool res = false;
 
-	for (list<Square>::reverse_iterator riter = this->collection.rbegin(); riter != this->collection.rend();
+	for (list<Square>::reverse_iterator riter = collection.rbegin(); riter != collection.rend();
 		++riter) {
 		if (riter->isContainingPoint(point)) {
 			res = true;
@@ -64,14 +64,14 @@ bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
 
 void SquareContainer::drawAllSquares() const {
 	clrscr();
-	for (auto iter = this->collection.begin(); iter != this->collection.end();
+	for (auto iter = collection.begin(); iter != collection.end();
 		++iter)
 		iter->draw();
 }
 
 void SquareContainer::drawAllSquares(const Square& selectedSquare) const {
 	clrscr();
-	for (auto iter = this->collection.begin(); iter != this->collection.end();
+	for (auto iter = collection.begin(); iter != collection.end();
 		++iter)
 		iter->draw();
 	selectedSquare.draw('@');
@@ -79,7 +79,7 @@ void SquareContainer::drawAllSquares(const Square& selectedSquare) const {
 
 void SquareContainer::drawAllSquares(const Point& selectedPoint) const {
 	clrscr();
-	for (auto iter = this->collection.begin(); iter != this->collection.end();
+	for (auto iter = collection.begin(); iter != collection.end();
 		++iter)
 		iter->draw();
 	selectedPoint.makeMeBlink();
@@ -89,15 +89,15 @@ void SquareContainer::mergeSquares(const Square& s1, const Square& s2) {
 	Square smallerSquare = (s1.getLength() <= s2.getLength() ? s1 : s2);
 	Square biggerSquare = (s1.getLength() <= s2.getLength() ? s2 : s1);
 	if (s1 < s2)
-		this->deleteSquare(s1);
+		deleteSquare(s1);
 	else if (s1 > s2)
-		this->deleteSquare(s2);
+		deleteSquare(s2);
 	else if (s1.overlaps(s2))
-		this->deleteSquare(biggerSquare);
+		deleteSquare(biggerSquare);
 	else // they must be completly strangers...
-		this->deleteSquare(smallerSquare);
+		deleteSquare(smallerSquare);
 }
 
 SquareContainer::~SquareContainer() {
-	this->collection.clear();
+	collection.clear();
 }

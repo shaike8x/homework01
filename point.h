@@ -11,10 +11,9 @@ private:
 public:
 	int getX() const;
 	int getY() const;
-	void setX(int x);
-	void setY(int y);
-	// basic constructor
-	Point(int myX = 1, int myY = 1);
+	void setX(const int x);
+	void setY(const int y);
+	Point(int myX, int myY);
 	// comparison operator overload
 	bool operator==(const Point& rhs) const;
 	void makeMeBlink() const;
