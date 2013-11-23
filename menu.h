@@ -4,18 +4,19 @@
 #include <iostream>
 using namespace std;
 
+typedef struct option {
+	bool active;
+	string text;
+	unsigned int id;
+} Option;
+
 class Menu
 {
 private:
-	vector<string> options;
-	int disabledOption;
-	bool someoneDisabled;
+	vector<Option> options;
+	bool checkOption(int choice);
 public:
-
-	Menu();
-	void setMenu(const vector<string> vOptions);
-	void displayOptions() const;
-	void disableOption(const int optionNum);
-	void disableOption(const bool flag);
-	int getSelection() const;
+		void setOption(unsigned int id, string text, bool active);
+		void toggleOption(unsigned int id, bool flag);
+		int displayAndGetInput();
 };

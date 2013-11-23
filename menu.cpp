@@ -1,49 +1,48 @@
 #include "menu.h"
 #include "cmd_utils.h"
 
-
-Menu::Menu() {
-	someoneDisabled = false;
-	disabledOption = 9;
-}
-
-void Menu::displayOptions() const {
-	clrscr();
-	for (unsigned int i = 0; i <= options.size(); ++i) {
-		if (someoneDisabled && i != disabledOption)
-			std::cout << i + 1 << ".\t" << options[i] << endl;
-	}
-}
-
-void Menu::setMenu(const vector<string> vOptions) {
-	options.reserve(vOptions.size());
-	options = vOptions;
-}
-
-void Menu::disableOption(int optionNum) {
-	disabledOption = optionNum;
-	someoneDisabled = true;
-}
-
-void Menu::disableOption(bool flag) {
-	someoneDisabled = false;
-}
-
-int Menu::getSelection() const {
-	std::cout << "Waiting for selection: ";
-	unsigned int res;
-	cin >> res;
-	
-	while (res <= 0 || res > options.size() || (res == disabledOption && 
-		someoneDisabled)) {
-		std::cout << endl;
-		std::cout << "Wrong option. Please try again.\n";
-		std::cout << "Waiting for selection: ";
-		cin >> res;
+bool Menu::checkOption(int choice) {
+	bool res = false;
+	for (int i = 0; i < options.size(); ++i) {
+		if (choice == options[i].id && options[i].active == true)
+			res = true;
 	}
 	return res;
 }
 
+void Menu::setOption(unsigned int id, string text, bool active) {
+	Option op;
+	op.id = id;
+	op.text = text;
+	op.active = active;
 
+	options.push_back(op);
+}
 
-	
+int Menu::displayAndGetInput() {
+	int choice;
+	bool ok = true;
+	for (int i = 0; i < options.size(); ++i) {
+		if (options[i].active == true)
+			cout << options[i].id << ".\t" << options[i].text << endl;
+	}
+	cout << "Your input: ";
+	cin >> choice;
+	ok = checkOption(choice);
+
+	while (!ok) {
+		cout << "Wrong option. Try again:\n";
+		cout << "Your input: ";
+		cin >> choice;
+		ok = checkOption(choice);
+	}
+
+	return choice;
+}
+
+void Menu::toggleOption(unsigned int id, bool flag) {
+	for (unsigned int i = 0; i < options.size(); ++i) {
+		if (options[i].id == id)
+			options[i].active = flag;
+	}
+}

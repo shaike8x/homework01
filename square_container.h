@@ -12,31 +12,32 @@ using std::endl;
 
 class SquareContainer {
 private:
-	int totalSquares;
 	list<Square> collection;
 	Square& createSquare(); // create square from user input
+	bool findSquareByPoint(list<Square>::iterator& it, const Point& point);
+	Point& getUserPoint();
+	list<Square>::iterator chooseSquare(bool& flag);
+	list<Square>::iterator selected1; bool ok1;
+	list<Square>::iterator selected2; bool ok2;
 
 public:
 	// default constructor
 	SquareContainer();
 	
 	~SquareContainer();
+	// return iterator for currently selected square (1 or 2)
+	list<Square>::iterator getSelcted(int num) const;
 	
-	int getTotalSquares() const;
+	int getTotalSquares() const; // ok
 	
+	void addSquare(); // ok
 	
-	
-	bool findSquareByPoint(const Point& point, Square& square);
-	
-	Point& getUserPoint();
-	
-	void addSquare();
-	
-	void mergeSquares(const Square& s1, const Square& s2);
+	void mergeSquares(); // ok
 	
 	// delete a square from the collection
-	void deleteSquare(const Square& square);
-	void pushSquareForward(const Square& square);
+	void deleteSquare(list<Square>::iterator it); // ok
+	
+	void pushSquareForward(list<Square>::iterator&);
 	// normal draw
 	void drawAllSquares() const;
 	// print the argument last with @

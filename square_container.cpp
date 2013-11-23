@@ -3,60 +3,64 @@
 #include <memory>
 using std::unique_ptr;
 
-SquareContainer::SquareContainer() { totalSquares = 0; }
+SquareContainer::SquareContainer() {}
 
-int SquareContainer::getTotalSquares() const { return totalSquares; }
+int SquareContainer::getTotalSquares() const { return collection.size(); }
 
 Square& SquareContainer::createSquare() {
 	int x, y, length;
-	char ch;
+	char ch; bool ok = true;
 	cout << "Enter x y length ch:\n";
 	cin >> x >> y >> length >> ch;
-
-	while (ch == '@' || length <= 0) {
-		cout << "Can't use this char / Can't use negative length. try again.\n";
-		cout << "Enter x y length ch:\n";
-		cin >> x >> y >> length >> ch;
+	
+	if (length <= 0 || ch == '@')
+		ok = false;
+	while (!ok) {
+		if (length <= 0 || ch == '@') {
+			cout << "Can't use this char / Can't use negative length. try again.\n";
+			cout << "Enter x y length ch:\n";
+			cin >> x >> y >> length >> ch;
+		}
+		else
+			ok = true;
 	}
-	unique_ptr<Square> res(new Square(x, y, length, ch));
+	//unique_ptr<Square> res(new Square(x, y, length, ch));
+	Square* res = new Square(x,y,length,ch);
 	return *res;
 }
 
 void SquareContainer::addSquare() {
-	Square s = createSquare();
+	Square& s = createSquare();
 	collection.push_back(s);
-	totalSquares++;
 }
 
-void SquareContainer::deleteSquare(const Square& square) {
-	collection.remove(square);
-	totalSquares--;
-}
+void SquareContainer::deleteSquare(list<Square>::iterator it) {
+		collection.erase(it);
+	}
 
-void SquareContainer::pushSquareForward(const Square& square) {
-	list<Square>::iterator temp;
-	for (temp = collection.begin(); temp != collection.end(); ++temp)
-	if (*temp == square)
-		collection.erase(temp);
-	collection.push_back(square);
+void SquareContainer::pushSquareForward(list<Square>::iterator& it) {
+	Square& s = *it;
+	collection.erase(it);
+	collection.push_back(s);
 }
 
 Point& SquareContainer::getUserPoint() {
 	int x, y;
 	cout << "Please enter x y coordinates:\n";
 	cin >> x >> y;
-	unique_ptr<Point> res(new Point(x, y));
-	return *res;
+	//unique_ptr<Point> res(new Point(x, y));
+	Point* p = new Point(x,y);
+	return *p;
 }
 
-bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
+bool SquareContainer::findSquareByPoint(list<Square>::iterator& it, const Point& p) {
 	bool res = false;
 
-	for (list<Square>::reverse_iterator riter = collection.rbegin(); riter != collection.rend();
-		++riter) {
-		if (riter->isContainingPoint(point)) {
+	for (list<Square>::iterator iter = collection.end(); iter != collection.begin() && res;
+		--iter) {
+		if (iter->isContainingPoint(p)) {
 			res = true;
-			square = *riter;
+			it = iter;
 			return res;
 		}
 	}
@@ -65,7 +69,7 @@ bool SquareContainer::findSquareByPoint(const Point& point, Square& square) {
 
 void SquareContainer::drawAllSquares() const {
 	clrscr();
-	if (!collection.empty())
+	if (collection.empty() == false)
 		for (auto iter = collection.begin(); iter != collection.end();
 			++iter)
 			iter->draw();
@@ -97,19 +101,55 @@ void SquareContainer::drawAllSquares(const Point& selectedPoint) const {
 		cout << "No squares to print.\n";
 }
 
-void SquareContainer::mergeSquares(const Square& s1, const Square& s2) {
-	Square smallerSquare = (s1.getLength() <= s2.getLength() ? s1 : s2);
-	Square biggerSquare = (s1.getLength() <= s2.getLength() ? s2 : s1);
-	if (s1 < s2)
-		deleteSquare(s1);
-	else if (s1 > s2)
-		deleteSquare(s2);
-	else if (s1.overlaps(s2))
-		deleteSquare(biggerSquare);
-	else // they must be completly strangers...
-		deleteSquare(smallerSquare);
+void SquareContainer::mergeSquares() {
+	Point p = getUserPoint();
+
+	bool found2 = findSquareByPoint(selected2, p);
+
+	if (found2 && selected1 != selected2) {
+		list<Square>::iterator smallerSquare = (selected1->getLength() <= selected2->getLength() ? selected1 : selected2);
+		list<Square>::iterator biggerSquare = (selected1->getLength() <= selected2->getLength() ? selected2 : selected1);
+		
+		if (*selected1 < *selected2)
+			collection.erase(selected1);
+		
+		else if (*selected1 > *selected2)
+			collection.erase(selected2);
+		
+		else if (selected1->overlaps(*selected2))
+			collection.erase(biggerSquare);
+		
+		else // they must be completly strangers...
+			collection.erase(smallerSquare);
+	}
+	else
+		cout << "Square not found! / Square already selected\n";
 }
 
 SquareContainer::~SquareContainer() {
 	collection.clear();
+}
+
+list<Square>::iterator SquareContainer::chooseSquare(bool& flag) {
+	cout << "==Choose Square==\n";
+	Point p = getUserPoint();
+	list<Square>::iterator it;
+	flag = findSquareByPoint(it, p);
+
+	if (!flag) {
+		cout << "No Match!\n";
+		drawAllSquares(p);
+	}
+	else
+		drawAllSquares(*it);
+	return it;
+}
+
+list<Square>::iterator SquareContainer::getSelcted(int num) const {
+	if (num == 1)
+		if (ok1)
+			return selected1;
+	if (num == 2)
+		if (ok2)
+			return selected2;
 }
