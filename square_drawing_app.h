@@ -1,4 +1,4 @@
-#include "square_container.h"
+#include "BoxContainer.h"
 #include "menu.h"
 #include <vector>
 #include <string>
@@ -7,16 +7,18 @@
 class SquareDrawingApp
 {
 private:
-	vector<string> mainVector;
-	vector<string> subVector;
+	int userSelection;
+	int userSubSelection;
+	bool found = false;
 	Menu mainMenu, subMenu;
 	
-	SquareContainer squares;
-
-
-	void initMenu(Menu& m, const vector<string> options);
-	void escListener() const;
+	BoxContainer squares;
 
 public:
+	SquareDrawingApp(int max);
+	void escListen();
 	void run();
+	void setupMainMenu();
+	void setupSubMenu();
+	void runSubMenu();
 };

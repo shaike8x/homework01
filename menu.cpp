@@ -3,7 +3,7 @@
 
 bool Menu::checkOption(int choice) {
 	bool res = false;
-	for (int i = 0; i < options.size(); ++i) {
+	for (unsigned int i = 0; i < options.size(); ++i) {
 		if (choice == options[i].id && options[i].active == true)
 			res = true;
 	}
@@ -20,9 +20,12 @@ void Menu::setOption(unsigned int id, string text, bool active) {
 }
 
 int Menu::displayAndGetInput() {
+	clrscr();
+	
 	int choice;
 	bool ok = true;
-	for (int i = 0; i < options.size(); ++i) {
+
+	for (unsigned int i = 0; i < options.size(); ++i) {
 		if (options[i].active == true)
 			cout << options[i].id << ".\t" << options[i].text << endl;
 	}

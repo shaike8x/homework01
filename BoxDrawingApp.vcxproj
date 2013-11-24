@@ -78,21 +78,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoxContainer.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="square_drawing_app.cpp" />
     <ClCompile Include="cmd_utils.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="square.cpp" />
-    <ClCompile Include="square_container.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxContainer.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="square_drawing_app.h" />
     <ClInclude Include="cmd_utils.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="square.h" />
-    <ClInclude Include="square_container.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

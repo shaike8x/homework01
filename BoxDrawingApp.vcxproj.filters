@@ -27,13 +27,13 @@
     <ClCompile Include="square.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="square_container.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="square_drawing_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxContainer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +47,13 @@
     <ClInclude Include="square.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="square_container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="square_drawing_app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="menu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

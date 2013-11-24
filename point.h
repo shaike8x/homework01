@@ -14,6 +14,7 @@ public:
 	void setX(const int x);
 	void setY(const int y);
 	Point(int myX, int myY);
+	Point();
 	// comparison operator overload
 	bool operator==(const Point& rhs) const;
 	void makeMeBlink() const;

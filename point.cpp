@@ -17,6 +17,7 @@ void Point::setX(const int x) { this->x = x; }
 void Point::setY(const int y) { this->y = y; }
 
 Point::Point(int myX, int myY) : x(myX), y(myY) {}
+Point::Point() : x(1), y(1) {}
 
 void Point::makeMeBlink() const {
 	bool flag = false;
