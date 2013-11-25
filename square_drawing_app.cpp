@@ -11,7 +11,7 @@ void SquareDrawingApp::setupMainMenu() {
 void SquareDrawingApp::setupSubMenu() {
 	subMenu.setOption(1, "Cancel Selection (Go Back)", true);
 	subMenu.setOption(2, "Delete Selected Square", true);
-	subMenu.setOption(3, "Push Square to Front", true);
+	subMenu.setOption(3, "Push Selected Square to Front", true);
 	subMenu.setOption(4, "Merge with another Square", true);
 }
 
@@ -25,12 +25,18 @@ void SquareDrawingApp::runSubMenu() {
 		break;
 	case 2:
 		squares.deleteSquare();
+		squares.drawAllSquares();
+		escListen();
 		break;
 	case 3:
 		squares.moveSquareForward();
+		squares.drawAllSquares();
+		escListen();
 		break;
 	case 4:
 		squares.mergeSquares();
+		squares.drawAllSquares();
+		escListen();
 		break;
 	}
 }
@@ -44,7 +50,7 @@ void SquareDrawingApp::run() {
 
 	while (userSelection != 8) {
 
-		if (squares.getTotalSquares() == 10)
+		if (squares.getTotalSquares() >= 10)
 			mainMenu.toggleOption(1, false);
 		else
 			mainMenu.toggleOption(1, true);
