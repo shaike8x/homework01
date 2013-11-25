@@ -10,15 +10,19 @@ class BoxContainer {
 private:
 	
 	// DATA MEMBERS
-	list<Square>::iterator s1, s2; // user square selection
-	bool ok1, ok2; // indicates if it's ok to use s1, s2
-	int maxSquares;
-	bool square_found; // indicator if s square was found from user point
-	Square* s;
-	Point p;
-	list<Square> sqrList;
+	list<Square>::iterator s1, s2; // iterators for user square selection
+	bool ok1, ok2; // indicators if it's ok to use s1, s2
+				   // so we dont accidentaly dereference an iterator for
+				   // non existing item
 
-	// INNER IMPLEMENTATION METHODS
+	int maxSquares; // maximum squares the instance should handle
+
+	bool square_found; // indicator if a square was found from user point
+	Square* s; // used to dynamically allocate new user squares
+	Point p; // stores the value of user (x,y) input
+	list<Square> sqrList; // doubly linked list to manage the squares
+
+	// IMPLEMENTATION
 	list<Square>::iterator findSquare(bool& ok);
 	Square* createSquare();
 	void reset1();
@@ -28,9 +32,9 @@ private:
 
 public:
 	
-	// INITIALIZATION / DESTRUCTION
+	// constructors
 	BoxContainer(int max); // Maximum squares the instance should handle
-	~BoxContainer();
+	~BoxContainer();		// will clear our list
 
 	// INTERFACE
 	int getTotalSquares() const;

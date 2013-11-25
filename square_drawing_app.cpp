@@ -77,8 +77,6 @@ void SquareDrawingApp::run() {
 	}
 }
 
-SquareDrawingApp::SquareDrawingApp(int max) : squares(max) {}
-
 void SquareDrawingApp::escListen() {
 	int ch;
 	ch = _getch();

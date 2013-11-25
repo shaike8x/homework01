@@ -5,7 +5,7 @@ using namespace std;
 
 int main(void) {
 
-	SquareDrawingApp app(1);
+	SquareDrawingApp app;
 	app.run();
 
 	return 0;
