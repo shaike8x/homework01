@@ -19,7 +19,7 @@ void SquareDrawingApp::runSubMenu() {
 	clrscr();
 	userSubSelection = subMenu.displayAndGetInput();
 
-	switch (userSelection) {
+	switch (userSubSelection) {
 	case 1:
 		userSelection = mainMenu.displayAndGetInput();
 		break;

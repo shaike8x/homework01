@@ -1,6 +1,13 @@
 #include "BoxContainer.h"
 
-BoxContainer::BoxContainer(unsigned int max) { maxSquares = max; }
+BoxContainer::BoxContainer(int max)  {
+ if (max > 0)
+	maxSquares = max;
+ else {
+	 cout << "Cannot init object with negative value!\n";
+	 return;
+ }
+}
 BoxContainer::~BoxContainer() { sqrList.clear(); }
 void BoxContainer::reset1() { ok1 = false; }
 void BoxContainer::reset2() { ok2 = false; }
@@ -33,7 +40,7 @@ list<Square>::iterator BoxContainer::findSquare(bool& ok) {
 	cout << endl;
 	p.setX(x);
 	p.setY(y);
-	for (res = sqrList.begin(); res != sqrList.end(); ++res) {
+	for (res = --sqrList.end(); res != sqrList.begin(); --res) {
 		if (res->isContainingPoint(p)) {
 			ok = true;
 			square_found = true;
@@ -43,7 +50,7 @@ list<Square>::iterator BoxContainer::findSquare(bool& ok) {
 	return res;
 }
 
-bool BoxContainer::checkLength(unsigned int length) const {
+bool BoxContainer::checkLength(int length) const {
 	return (length > 0);
 }
 
@@ -51,7 +58,7 @@ bool BoxContainer::checkChar(char ch) const {
 	return (ch != '@');
 }
 
-void BoxContainer::drawAllSquares() {
+void BoxContainer::drawAllSquares() const {
 	clrscr();
 	for (auto iter = sqrList.begin(); iter != sqrList.end(); ++iter)
 		iter->draw(); // draw all the squares
@@ -90,7 +97,7 @@ Square* BoxContainer::createSquare() {
 	ok = checkLength(length);
 	while (!ok) {
 		cout << "\tWRONG LENGTH VALUE\n";
-		cout << "\tEnter Square Length: \n";
+		cout << "\tEnter Square Length: ";
 		cin >> length;
 		ok = checkLength(length);
 	}
@@ -126,16 +133,16 @@ void BoxContainer::moveSquareForward() {
 void BoxContainer::mergeSquares() {
 	s2 = findSquare(ok2);
 
-	if (!ok2) {
-		cout << "\tNo such square.\n";
+	if (!ok2 || !ok1) {
+		clrscr();
+		cout << "\tNo such square. Cannot merge\n";
+		std::this_thread::sleep_for(std::chrono::milliseconds(700));
 		return;
 	}
 	if (s1 == s2) {
+		clrscr();
 		cout << "\tCan't merge with the same square. Nothing to do.\n";
-		return;
-	}
-	if (!ok1) {
-		cout << "\tNo first square selected.\n";
+		std::this_thread::sleep_for(std::chrono::milliseconds(700));
 		return;
 	}
 	auto smaller = (s1->getLength() <= s2->getLength()) ? s1 : s2;

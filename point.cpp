@@ -22,7 +22,7 @@ Point::Point() : x(1), y(1) {}
 void Point::makeMeBlink() const {
 	bool flag = false;
 
-	while (!flag && (!_kbhit() || _getch() != ESC_ASCII)) {
+	while (!flag && (!_kbhit() || _getch() != 27)) {
 		gotoxy(x,y);
 		cout << '@';
 		std::this_thread::sleep_for(std::chrono::milliseconds(700));
@@ -31,6 +31,6 @@ void Point::makeMeBlink() const {
 		std::this_thread::sleep_for(std::chrono::milliseconds(700));
 
 		if (_kbhit())
-			flag = (_getch() == ESC_ASCII);
+			flag = (_getch() == 27);
 	}
 }

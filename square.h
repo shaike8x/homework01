@@ -24,7 +24,3 @@ public:
 	void draw(const char special) const;
 	bool isContainingPoint(const Point& point) const;
 };
-
-// TODO: overload <,>,!= for merging
-// implement the acual merge in square_container
-// create menu
