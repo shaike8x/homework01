@@ -9,93 +9,128 @@ int Square::getLength() const { return m_length; }
 int Square::getX() const { return this->x; }
 int Square::getY() const { return this->y; }
 
-void Square::draw() const {
-	int cordY = y, cordX = x;
-	char ch = m_ch;
-	int lengthX, lengthY;
-	lengthX = lengthY = m_length;
 
-	gotoxy(x, y);
-
-	if (x < 0) {
-		if (cordX + m_length >= 0) {
-			lengthX = m_length + cordX;
-			cordX = 0;
-			gotoxy(cordX, cordY);
-		}
-		else
-			return;
-	}
-	if (y < 0) {
-		if (cordY + m_length >= 0) {
-			lengthY = m_length + cordY;
-			cordY = 0;
-			gotoxy(cordX, cordY);
-		}
-		else
-			return;
-	}
-
-	for (auto i = 0; i <= lengthY; ++i) {
-		for (auto j = 0; j <= lengthX; ++j) {
-			if (i == 0 || i == lengthY)
-				cout << ch;
-			else {
-				if (j == 0)
-					cout << ch;
-				else if (j == lengthX)
-					cout << ch;
-				else
-					cout << " ";
-			}
-		}
-		gotoxy(cordX, ++cordY);
-	}
-}
 
 void Square::draw(const char special) const {
-	int cordY = y, cordX = x;
+	int cordY = this->y, cordX = this->x;
 	char ch = special;
 	int lengthX, lengthY;
-	lengthX = lengthY = m_length;
+	lengthX = lengthY = this->m_length;
 
-	gotoxy(x, y);
+	gotoxy(this->x, this->y);
 
 	if (x < 0) {
-		if (cordX + m_length >= 0) {
-			lengthX = m_length + cordX;
+		if (cordX + this->m_length >= 0) {
+			lengthX = this->m_length + cordX;
 			cordX = 0;
-			gotoxy(cordX, cordY);
+
 		}
 		else
 			return;
 	}
 	if (y < 0) {
-		if (cordY + m_length >= 0) {
-			lengthY = m_length + cordY;
+		if (cordY + this->m_length >= 0) {
+			lengthY = this->m_length + cordY;
 			cordY = 0;
-			gotoxy(cordX, cordY);
+
 		}
 		else
 			return;
 	}
+	gotoxy(cordX, cordY);
+	for (auto i = 1; i <= lengthY; ++i) {
+		for (auto j = 1; j <= lengthX; ++j) {
+			if (i == 1) {
+				if (x < 0 && y < 0 && j != lengthX)
+					cout << " ";
+				else if (y < 0) {
+					if (j == 1 || j == lengthX)
+						cout << ch;
+					else
+						cout << " ";
+				}
 
-	for (auto i = 0; i <= lengthY; ++i) {
-		for (auto j = 0; j <= lengthX; ++j) {
-			if (i == 0 || i == lengthY)
+				else
+					cout << ch;
+			}
+			else if (i == lengthY)
 				cout << ch;
 			else {
-				if (j == 0)
+				if (x < 0 && j != lengthX)
+					cout << " ";
+				else if (j == 1)
 					cout << ch;
 				else if (j == lengthX)
 					cout << ch;
 				else
 					cout << " ";
+
 			}
 		}
 		gotoxy(cordX, ++cordY);
 	}
 }
+
+void Square::draw() const {
+	int cordY = this->y, cordX = this->x;
+	char ch = this->m_ch;
+	int lengthX, lengthY;
+	lengthX = lengthY = this->m_length;
+
+	gotoxy(this->x, this->y);
+
+	if (x < 0) {
+		if (cordX + this->m_length >= 0) {
+			lengthX = this->m_length + cordX;
+			cordX = 0;
+
+		}
+		else
+			return;
+	}
+	if (y < 0) {
+		if (cordY + this->m_length >= 0) {
+			lengthY = this->m_length + cordY;
+			cordY = 0;
+
+		}
+		else
+			return;
+	}
+	gotoxy(cordX, cordY);
+	for (auto i = 1; i <= lengthY; ++i) {
+		for (auto j = 1; j <= lengthX; ++j) {
+			if (i == 1) {
+				if (x < 0 && y < 0 && j != lengthX)
+					cout << " ";
+				else if (y < 0) {
+					if (j == 1 || j == lengthX)
+						cout << ch;
+					else
+						cout << " ";
+				}
+
+				else
+					cout << ch;
+			}
+			else if (i == lengthY)
+				cout << ch;
+			else {
+				if (x < 0 && j != lengthX)
+					cout << " ";
+				else if (j == 1)
+					cout << ch;
+				else if (j == lengthX)
+					cout << ch;
+				else
+					cout << " ";
+
+			}
+		}
+		gotoxy(cordX, ++cordY);
+	}
+}
+
 
 bool Square::isContainingPoint(const Point& point) const {
 	int leftX = x;

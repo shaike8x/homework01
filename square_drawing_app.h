@@ -15,6 +15,7 @@ private:
 	BoxContainer squares;
 
 public:
+	SquareDrawingApp();
 	void escListen();
 	void run();
 	void setupMainMenu();

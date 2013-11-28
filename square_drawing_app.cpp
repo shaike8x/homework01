@@ -86,3 +86,7 @@ void SquareDrawingApp::escListen() {
 	}
 	clrscr();
 }
+
+SquareDrawingApp::SquareDrawingApp() {
+	
+}

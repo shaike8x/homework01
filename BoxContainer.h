@@ -3,6 +3,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <string>
 #include "square.h"
 
 
@@ -33,7 +34,7 @@ private:
 public:
 	
 	// constructors
-	BoxContainer(int max); // Maximum squares the instance should handle
+	//BoxContainer(int max); // Maximum squares the instance should handle
 	~BoxContainer();		// will clear our list
 
 	// INTERFACE

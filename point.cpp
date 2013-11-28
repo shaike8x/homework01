@@ -9,7 +9,6 @@ bool Point::operator==(const Point& rhs) const {
 }
 
 int Point::getX() const { return x; }
-
 int Point::getY() const { return y; }
 
 void Point::setX(const int x) { this->x = x; }

@@ -1,13 +1,5 @@
 #include "BoxContainer.h"
 
-BoxContainer::BoxContainer(int max)  {
- if (max > 0)
-	maxSquares = max;
- else {
-	 cout << "Cannot init object with negative value!\n";
-	 return;
- }
-}
 BoxContainer::~BoxContainer() { sqrList.clear(); }
 void BoxContainer::reset1() { ok1 = false; }
 void BoxContainer::reset2() { ok2 = false; }
